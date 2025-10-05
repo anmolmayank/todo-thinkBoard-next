@@ -35,8 +35,8 @@ export default function LoginPage() {
       // Login user
       const res = await axios.post("/api/auth/login", formData);
 
-      if (res.status === 201) {
-        toast.success("Registration successful!");
+      if (res.status === 200) {
+        toast.success("Login successful!");
         router.push("/dashboard"); // ✅ Auto-redirect
       }
     } catch (err: any) {
@@ -55,13 +55,24 @@ export default function LoginPage() {
         <CardContent>
           <form onSubmit={handleSubmit} className="space-y-4">
             <div>
-              <Input placeholder="Username" onChange={handleChange} />
+              <Input 
+                id="email"
+                name="email"
+                type="email"
+                placeholder="Enter your email"
+                value={formData.email}
+                onChange={handleChange}
+                required />
             </div>
             <div>
               <Input
+                id="password"
+                name="password"
                 type="password"
-                placeholder="Password"
+                placeholder="Enter password"
+                value={formData.password}
                 onChange={handleChange}
+                required
               />
             </div>
             <Button type="submit" className="w-full" disabled={loading}>
@@ -71,7 +82,7 @@ export default function LoginPage() {
         </CardContent>
         <CardFooter>
           <div className="m-auto">
-            <CardDescription>Not an user ?</CardDescription>
+            <CardDescription className="px-4">Not an user ?</CardDescription>
             <Button onClick={() => redirect("/register")} variant={"link"}>
               Register Here
             </Button>

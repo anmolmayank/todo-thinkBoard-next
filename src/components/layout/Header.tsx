@@ -54,6 +54,7 @@ export default function Header() {
     }
   };
 
+  // ✅ Handle Logout
   const handleLogout = async () => {
     try {
       await axios.post("/api/auth/logout");
@@ -87,7 +88,11 @@ export default function Header() {
             onClick={toggleTheme}
             title={isDark ? "Switch to Light Mode" : "Switch to Dark Mode"}
           >
-            {isDark ? <Sun className="w-4 h-4" /> : <Moon className="w-4 h-4" />}
+            {isDark ? (
+              <Sun className="w-4 h-4" />
+            ) : (
+              <Moon className="w-4 h-4" />
+            )}
           </Button>
 
           {/* Logout only on Dashboard */}

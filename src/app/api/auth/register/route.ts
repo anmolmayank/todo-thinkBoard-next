@@ -23,7 +23,7 @@ export async function POST(req: Request) {
     const user = await User.create({ name, email, password: hashedPassword });
 
     // Generate JWT
-    const token = jwt.sign({ id: user._id, email: user.email }, JWT_SECRET, {
+    const token = jwt.sign({ userId: user._id, email: user.email, userName: user.name }, JWT_SECRET, {
       expiresIn: "7d",
     });
 

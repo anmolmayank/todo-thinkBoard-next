@@ -4,13 +4,13 @@ import User from "@/models/User";
 import { comparePassword, generateToken } from "@/lib/auth";
 
 export async function POST(req: Request) {
-  const { username, password } = await req.json();
+  const { email, password } = await req.json();
   await connectDB();
-  const user = await User.findOne({ username });
+  const user = await User.findOne({ email });
   if (!user || !(await comparePassword(password, user.password)))
     return NextResponse.json({ message: "Invalid credentials" }, { status: 401 });
 
-  const token = generateToken(user._id.toString());
+  const token = generateToken(user._id.toString(), user.email, user.name);
   const response = NextResponse.json({ message: "Login successful" });
 
   // Store JWT in HTTP-only cookie
