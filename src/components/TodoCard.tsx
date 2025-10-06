@@ -33,7 +33,7 @@ export default function TodoCard({
             {title}
           </CardTitle>
         </div>
-        <Button variant="ghost" size="icon" onClick={onDelete}>
+        <Button aria-label="delete" variant="ghost" size="icon" onClick={onDelete}>
           <Trash2 className="w-4 h-4 text-red-500" />
         </Button>
       </CardHeader>
